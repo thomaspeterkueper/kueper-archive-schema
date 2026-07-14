@@ -66,8 +66,10 @@ ersetzt sie aber nicht. `work_items`, `review_decisions`,
    `document_claims`, `document_sections`, `search_embeddings`) —
    Migrationen 0003, 0006.
 
-Benutzer/RLS (Migration 0007) ist Voraussetzung für jede Phase, bei der
-Schreibzugriff über Supabase Auth erfolgt.
+Benutzer/RLS (Migrationen 0007 + 0008) ist Voraussetzung für jede Phase, bei
+der Schreibzugriff über Supabase Auth erfolgt. RLS wird von Anfang an
+aktiviert, nicht nachträglich ergänzt — insbesondere weil Supabase für neue
+Projekte ab 30.05.2026 explizite Postgres-Grants für die Data API voraussetzt.
 
 ## Bewusst ausgelassen in V1
 
@@ -96,9 +98,11 @@ Dashboard.
 
 ## Offene Punkte
 
-- RLS-Policies sind in Migration 0007 nur als TODO markiert, nicht ausformuliert.
 - Sprachabhängige Volltextsuche (aktuell fest `german`).
-- Konkreter Zeitpunkt der produktiven Anwendung auf KUE bzw. OTA.
+- Konkreter Zeitpunkt der produktiven Anwendung auf OTA (KUE läuft, siehe
+  Umsetzungsplan).
+- Erweiterung des Rollenmodells über `owner`-only hinaus (editor/reviewer/
+  viewer), sobald mehr als eine Person administriert.
 
 ## Kosten & Tier-Strategie
 

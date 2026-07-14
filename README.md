@@ -33,7 +33,7 @@ eine produktive Supabase-Instanz angewendet**. Umsetzungsplan (ECO-ARC-0013):
 ## Struktur
 
 ```text
-migrations/   Gemeinsame SQL-Migrationen, phasenweise (0001–0007)
+migrations/   Gemeinsame SQL-Migrationen, phasenweise (0001–0008)
 seeds/kue/    Seed-Daten für die KUE-Instanz (archive_config, evidence_markers)
 seeds/ota/    Seed-Daten für die OTA-Instanz
 docs/         Architekturdokumentation

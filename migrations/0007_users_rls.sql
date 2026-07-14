@@ -17,8 +17,7 @@ create table user_roles (
 );
 -- Rollen: owner, editor, reviewer, viewer.
 --
--- TODO (vor produktiver Nutzung): RLS-Policies fuer alle redaktionellen
--- Tabellen (documents, document_versions, requests, work_items,
--- review_decisions, publication_checks) ergaenzen, die Schreibzugriff auf
--- role = 'owner' beschraenken. Im vorgelegten Entwurf noch nicht als SQL
--- ausformuliert -- vor Anwendung auf eine reale Instanz nachzuziehen.
+-- Die tatsaechlichen RLS-Policies (Owner-only-Zugriff auf alle
+-- redaktionellen Tabellen) stehen in 0008_rls_policies.sql. Diese Migration
+-- (0007) legt nur das Rollenmodell an; ohne 0008 bleiben die Tabellen ohne
+-- RLS-Durchsetzung. Beide Migrationen gehoeren zusammen angewendet.
