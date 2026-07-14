@@ -99,3 +99,30 @@ Dashboard.
 - RLS-Policies sind in Migration 0007 nur als TODO markiert, nicht ausformuliert.
 - Sprachabhängige Volltextsuche (aktuell fest `german`).
 - Konkreter Zeitpunkt der produktiven Anwendung auf KUE bzw. OTA.
+
+## Kosten & Tier-Strategie
+
+Owner-Entscheidung (2026-07-14): Beide Archiv-Datenbanken starten auf dem
+**Supabase Free Tier** (Stand Juli 2026: 2 kostenlose Projekte pro
+Organisation, keine Kreditkarte nötig, kommerzielle Nutzung erlaubt).
+
+Begründung: Die Archiv-DBs sind reine Redaktions-/Admin-Werkzeuge (siehe
+README: „Die öffentliche Website benötigt keinen direkten Supabase-Zugang").
+Es gibt keinen Live-Traffic echter Endnutzer, der durch eine
+Inaktivitätspause gestört würde.
+
+**Tradeoff:** Free-Tier-Projekte pausieren nach 7 Tagen ohne
+Datenbankaktivität automatisch (Daten bleiben erhalten, Reaktivierung per
+Dashboard-Klick, ca. 30 Sekunden). Für OTA (aufgeschoben, überwiegend
+inaktiv) ist das unproblematisch. Für KUE (aktiver Testbetrieb) kann es
+zwischen Redaktionssitzungen zu Pausen kommen — kein Datenverlust, nur
+manuelle Reaktivierung nötig.
+
+**Wann auf Pro upgraden** ($10–25/Monat je nach Org-Plan): sobald die Pause
+im Alltag störend wird, echte Backups gebraucht werden (Free Tier hat keine
+automatischen Backups), oder die 500-MB-Datenbankgrenze erreicht wird.
+Upgrade-Entscheidung pro Projekt einzeln, nicht zwingend beide gleichzeitig.
+
+**Voraussetzung:** 2 freie Projekt-Slots in der Supabase-Organisation. Falls
+bestehende Projekte (NOXIA, SSF, noxia-universe) diese bereits belegen, ist
+das vor Anlage zu prüfen (Supabase Dashboard → Organisationseinstellungen).
