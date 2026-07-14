@@ -1,3 +1,5 @@
+> **Korrektur (2026-07-14):** Aus Kostengründen teilen sich KUE und OTA seit dieser Korrektur ein einzelnes Supabase-Projekt (`kue-archive`) statt zwei getrennter Projekte — getrennt sind stattdessen die Postgres-Schemas (`public` für KUE, `ota` für OTA). Owner-Verwaltung bleibt zentral, nicht dupliziert. Details: [`apply-second-archive-schema.md`](apply-second-archive-schema.md). Der Rest dieses Dokuments beschreibt weiterhin das Datenmodell selbst — das ist unverändert.
+
 # Architektur — KUEPER Archive Core
 
 Vollständige Herleitung und Entscheidung: `kueper-ecosystem/decisions/ECO-ARC-0013-2026-DE.md`.

@@ -3,13 +3,21 @@
 Gemeinsames Datenbankschema (Migrationen, Typdefinitionen, Importer,
 Validatoren) für kanonische Dokumentarchive im KUEPER-Ökosystem.
 
-**Ein Datenmodell, zwei physisch getrennte Supabase-Projekte:** `kueper.com`
-(Code `KUE`, Namespace `DOC:KUE:*`) und `overtime-archive.org` (Code `OTA`,
-Namespace `DOC:OTA:*`) verwenden identische Migrationen, RLS-Policies,
-Import-/Validierungslogik und Suchindexstruktur — aber getrennte
-Datenbankinstanzen. Keine gemeinsame Datenbank mit `tenant_id`. Die
-Gemeinsamkeit entsteht durch geteiltes Schema, nicht durch geteilte
-Datenhaltung.
+**Ein Datenmodell, ein gemeinsames Supabase-Projekt (`kue-archive`),
+getrennte Postgres-Schemas:** `kueper.com` (Code `KUE`, Namespace
+`DOC:KUE:*`) liegt in `public`, `overtime-archive.org` (Code `OTA`, Namespace
+`DOC:OTA:*`) in einem eigenen Schema `ota`. Beide verwenden identische
+Migrationen, RLS-Policies, Import-/Validierungslogik und
+Suchindexstruktur. Keine gemeinsame Datenbank mit `tenant_id`-Spalte — die
+Trennung erfolgt über Postgres-Schemas, nicht über eine Mandantenspalte in
+jeder Zeile.
+
+**Korrektur vom 2026-07-14:** Ursprünglich waren zwei physisch getrennte
+Supabase-Projekte vorgesehen (siehe `git log` / ECO-ARC-0013). Aus
+Kostengründen (10$ statt 20$/Monat) teilen sich beide Archive nun ein
+Projekt. Owner-Verwaltung (`profiles`, `user_roles`, `is_owner()`) bleibt
+dabei einmalig zentral, nicht pro Schema dupliziert — siehe
+[`docs/apply-second-archive-schema.md`](docs/apply-second-archive-schema.md).
 
 ## Rolle im Ökosystem
 
@@ -19,16 +27,15 @@ Rolle: `infrastructure`. Details und Begründung:
 [`decisions/ECO-ARC-0013-2026-DE.md`](https://github.com/thomaspeterkueper/kueper-ecosystem/blob/main/decisions/ECO-ARC-0013-2026-DE.md)
 im Repository `kueper-ecosystem`.
 
-## Status: Schema V1, Entwurf
+## Status
 
-Die Migrationen in diesem Repository sind **dokumentiert, aber noch nicht auf
-eine produktive Supabase-Instanz angewendet**. Umsetzungsplan (ECO-ARC-0013):
-
-1. Schema V1 dokumentieren. ✅ (dieses Repository)
-2. Zuständigkeit klären. ✅ (ECO-ARC-0013)
-3. Migrationen anlegen. ✅ (dieses Repository)
-4. Zuerst `kueper.com` importiert und testet.
-5. Danach wendet `overtime-archive.org` dieselben Migrationen unverändert an.
+1. Schema V1 dokumentiert. ✅
+2. Zuständigkeit geklärt. ✅ (ECO-ARC-0013)
+3. Migrationen angelegt. ✅
+4. KUE (`public`-Schema in `kue-archive`) angewendet und produktiv. ✅
+   (Supabase Free Tier, Organisation Kueper-Archives, Frankfurt)
+5. OTA (`ota`-Schema in **demselben** Projekt `kue-archive`) — offen, siehe
+   [`docs/apply-second-archive-schema.md`](docs/apply-second-archive-schema.md).
 
 ## Struktur
 
