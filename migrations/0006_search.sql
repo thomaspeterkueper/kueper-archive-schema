@@ -4,6 +4,11 @@
 -- Dokumentsprache 'german', 'english' oder 'simple' waehlt (offener Punkt,
 -- siehe ECO-ARC-0013, Abschnitt "Nicht entschieden").
 
+-- pgvector-Extension aktivieren -- Voraussetzung fuer den vector-Typ in
+-- search_embeddings weiter unten. In neuen Supabase-Projekten standardmaessig
+-- nicht aktiviert.
+create extension if not exists vector;
+
 create table document_sections (
   id uuid primary key default gen_random_uuid(),
   document_version_id uuid not null references document_versions(id) on delete cascade,
