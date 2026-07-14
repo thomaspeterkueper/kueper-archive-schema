@@ -77,6 +77,23 @@ Veröffentlichungen, öffentliche Benutzerkonten, Kommentare, feingranulare
 Teams/Organisationen, Datenbank als Schreibquelle für `main`, vollautomatische
 globale Claim-IDs ohne KG-Abstimmung.
 
+## Namenskonvention für Supabase-Projekte
+
+Nirgends im Ökosystem war bisher ein Namensschema für den Supabase-
+Anzeigenamen dokumentiert (`noxiagame` und `solarsciencefoundation`
+referenzieren nur ihre zufällige Projekt-Ref-ID). Für Archive Core gilt ab
+sofort:
+
+```text
+{archive_code}-archive
+```
+
+Also `kue-archive` für KUE, `ota-archive` für OTA — passend zum jeweiligen
+`archive_code` in `seeds/*/archive-config.sql`. Der Name hat keine technische
+Funktion (Supabase nutzt intern ohnehin die Projekt-Ref-ID), dient aber der
+eindeutigen Wiedererkennbarkeit der beiden zusammengehörigen Projekte im
+Dashboard.
+
 ## Offene Punkte
 
 - RLS-Policies sind in Migration 0007 nur als TODO markiert, nicht ausformuliert.
