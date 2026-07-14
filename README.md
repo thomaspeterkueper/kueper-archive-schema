@@ -77,3 +77,17 @@ für den Hauptbranch.
 
 Änderungswünsche liegen als External Task unter `external-tasks/open/`.
 Format: [`ECO-ARC-0006`](https://github.com/thomaspeterkueper/kueper-ecosystem/blob/main/decisions/ECO-ARC-0006-2026-DE.md).
+
+## GitHub-Integration (Supabase)
+
+`kue-archive` hat dieses Repository als GitHub-Quelle hinterlegt. Solange
+hier **kein** `supabase/`-Ordner existiert und „Deploy to production" nicht
+aktiv ist, löst das keinen automatischen Deploy aus — die Verknüpfung ist
+aktuell passiv. Migrationen werden während der Testphase bewusst **manuell**
+über den SQL-Editor eingespielt (siehe Umsetzungsplan, ECO-ARC-0013).
+
+Grund für die Zurückhaltung: Dieses Repository bedient perspektivisch zwei
+Datenbanken (KUE, später OTA), Supabase's GitHub-Integration ist aber auf
+ein Repo → ein Projekt ausgelegt. Eine echte CI/CD-Anbindung braucht daher
+erst eine bewusste Strukturentscheidung (`supabase/`-Ordner, ggf. getrennte
+Branches oder Repos je Instanz) — nicht vor Abschluss der KUE-Testphase.
